@@ -13,10 +13,11 @@
 		775746BD2A6512B20038082D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 775746BB2A6512B20038082D /* Main.storyboard */; };
 		775746BF2A6512BD0038082D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775746BE2A6512BD0038082D /* Assets.xcassets */; };
 		775746C22A6512BD0038082D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 775746C02A6512BD0038082D /* LaunchScreen.storyboard */; };
+		775746CC2A6517D70038082D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775746CB2A6517D70038082D /* AddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		775746B22A6512B20038082D /* MyRemiders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRemiders.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		775746B22A6512B20038082D /* MyReminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		775746B52A6512B20038082D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		775746B72A6512B20038082D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		775746B92A6512B20038082D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +25,7 @@
 		775746BE2A6512BD0038082D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		775746C12A6512BD0038082D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		775746C32A6512BD0038082D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		775746CB2A6517D70038082D /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +42,7 @@
 		775746A92A6512B20038082D = {
 			isa = PBXGroup;
 			children = (
-				775746B42A6512B20038082D /* MyRemiders */,
+				775746B42A6512B20038082D /* MyReminders */,
 				775746B32A6512B20038082D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,12 +50,12 @@
 		775746B32A6512B20038082D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				775746B22A6512B20038082D /* MyRemiders.app */,
+				775746B22A6512B20038082D /* MyReminders.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		775746B42A6512B20038082D /* MyRemiders */ = {
+		775746B42A6512B20038082D /* MyReminders */ = {
 			isa = PBXGroup;
 			children = (
 				775746B52A6512B20038082D /* AppDelegate.swift */,
@@ -63,16 +65,17 @@
 				775746BE2A6512BD0038082D /* Assets.xcassets */,
 				775746C02A6512BD0038082D /* LaunchScreen.storyboard */,
 				775746C32A6512BD0038082D /* Info.plist */,
+				775746CB2A6517D70038082D /* AddViewController.swift */,
 			);
-			path = MyRemiders;
+			path = MyReminders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		775746B12A6512B20038082D /* MyRemiders */ = {
+		775746B12A6512B20038082D /* MyReminders */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 775746C62A6512BD0038082D /* Build configuration list for PBXNativeTarget "MyRemiders" */;
+			buildConfigurationList = 775746C62A6512BD0038082D /* Build configuration list for PBXNativeTarget "MyReminders" */;
 			buildPhases = (
 				775746AE2A6512B20038082D /* Sources */,
 				775746AF2A6512B20038082D /* Frameworks */,
@@ -82,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = MyRemiders;
+			name = MyReminders;
 			productName = MyRemiders;
-			productReference = 775746B22A6512B20038082D /* MyRemiders.app */;
+			productReference = 775746B22A6512B20038082D /* MyReminders.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 775746AD2A6512B20038082D /* Build configuration list for PBXProject "MyRemiders" */;
+			buildConfigurationList = 775746AD2A6512B20038082D /* Build configuration list for PBXProject "MyReminders" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				775746B12A6512B20038082D /* MyRemiders */,
+				775746B12A6512B20038082D /* MyReminders */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +142,7 @@
 			files = (
 				775746BA2A6512B20038082D /* ViewController.swift in Sources */,
 				775746B62A6512B20038082D /* AppDelegate.swift in Sources */,
+				775746CC2A6517D70038082D /* AddViewController.swift in Sources */,
 				775746B82A6512B20038082D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,12 +292,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6569LYJ88;
-				INFOPLIST_FILE = MyRemiders/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyReminders/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecqdigital.MyRemiders;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecqdigital.MyReminders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,12 +311,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6569LYJ88;
-				INFOPLIST_FILE = MyRemiders/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyReminders/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecqdigital.MyRemiders;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecqdigital.MyReminders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -322,7 +326,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		775746AD2A6512B20038082D /* Build configuration list for PBXProject "MyRemiders" */ = {
+		775746AD2A6512B20038082D /* Build configuration list for PBXProject "MyReminders" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				775746C42A6512BD0038082D /* Debug */,
@@ -331,7 +335,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		775746C62A6512BD0038082D /* Build configuration list for PBXNativeTarget "MyRemiders" */ = {
+		775746C62A6512BD0038082D /* Build configuration list for PBXNativeTarget "MyReminders" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				775746C72A6512BD0038082D /* Debug */,
