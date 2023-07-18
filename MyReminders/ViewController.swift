@@ -29,6 +29,17 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func didTapAdd(){
+        
+        //Ask for permission to send push notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {success, error in
+            if success {
+                print("Push notifications allowed by user.")
+            } else if let error = error {
+                print("An error happened on requesting notifications.")
+                print(error)
+            }
+        })
+        
         // Show add vc
         guard let vc = storyboard?.instantiateViewController(identifier: "add") as? AddViewController else{
             return
@@ -58,16 +69,16 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @IBAction func didTapPush(){
         //Request permission
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {success, error in
-            if success{
-                //Schedule push
-                self.schedulePush(title: "Hello World", body: "This is the content of the reminder. Oh yeah.", date: Date().addingTimeInterval(10))
-            }
-            else if let error = error {
-                print("An error happened on requesting notifications.")
-                print(error)
-            }
-        })
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {success, error in
+//            if success{
+//                //Schedule push
+//                self.schedulePush(title: "Hello World", body: "This is the content of the reminder. Oh yeah.", date: Date().addingTimeInterval(10))
+//            }
+//            else if let error = error {
+//                print("An error happened on requesting notifications.")
+//                print(error)
+//            }
+//        })
     }
     
     func schedulePush(title:String, body:String, date:Date){
@@ -85,6 +96,8 @@ class ViewController: UIViewController, UITableViewDataSource {
             if error != nil{
                 print("Push request went wrong.")
                 print(error!)
+            } else {
+                print("Push request sent successfully")
             }
         })
     }
