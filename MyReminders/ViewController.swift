@@ -179,7 +179,7 @@ extension ViewController: UITableViewDelegate{
             [weak self] (action, view, completionHandler) in self?.handleEditItem(indexPath: indexPath.row)
             completionHandler(true)
         }
-        editAction.backgroundColor = .blue
+        editAction.backgroundColor = .gray
         
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
@@ -201,7 +201,7 @@ extension ViewController {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 84
     }
 }
 

@@ -31,11 +31,11 @@ class ReminderTableViewCell: UITableViewCell {
     func configure(with model: MyReminder){
         self.title.text = model.title
         self.title.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
-        self.title.textColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+        self.title.textColor = UIColor.init(red: 26/255, green: 26/255, blue: 26/255, alpha: 1)
         
         self.body.text = model.body
         self.body.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        self.body.textColor = UIColor.init(red: 115/255, green: 115/255, blue: 115/255, alpha: 1)
+        self.body.textColor = UIColor.init(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
         
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm E, d MM Y"
@@ -49,7 +49,8 @@ class ReminderTableViewCell: UITableViewCell {
     
     func markOutdated(with model:MyReminder){
         if(model.date < Date()){
-            self.date.textColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+            self.date.textColor = UIColor.init(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.8)
+            self.date.text?.append(" - Outdated")
         }
     }
 }
