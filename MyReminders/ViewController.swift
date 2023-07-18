@@ -19,6 +19,10 @@ class ViewController: UIViewController {
         
         table.delegate = self
         table.dataSource = self
+        
+        loadSavedData()
+        
+        navigationItem.titleView?.tintColor = UIColor.red
     }
     
     @IBAction func didTapAdd(){
@@ -32,12 +36,18 @@ class ViewController: UIViewController {
         vc.completion = {title,body,date in
             DispatchQueue.main.async {
                 self.navigationController?.popToRootViewController(animated: true)
-                let newReminder = MyReminder(title: title, date: date, identifier: "id_\(title)")
+                let newReminder = MyReminder(title: title, date: date, identifier: "id_\(title)", body: body)
                 self.models.append(newReminder)
                 self.table.reloadData()
                 
                 // Set push notification
                 self.schedulePush(title: title, body: body, date: date)
+                
+                print("Reminder to save -->")
+                print(newReminder)
+                
+                //Save new reminder
+                dataCoded.manageDataCoded.encodeData(data: newReminder)
             }
         }
         navigationController?.pushViewController(vc, animated: true)
@@ -75,6 +85,14 @@ class ViewController: UIViewController {
             }
         })
     }
+    
+    func loadSavedData(){
+        let savedData = UDM.udm.getAllData()
+        
+        if !savedData.isEmpty{
+            models = savedData
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate{
@@ -105,8 +123,69 @@ extension ViewController:UITableViewDataSource{
     }
 }
 
-struct MyReminder {
+struct MyReminder: Codable {
     let title: String
     let date: Date
     let identifier: String
+    let body: String
+}
+
+class UDM{
+    
+    static let udm = UDM()
+        
+    let defaults = UserDefaults(suiteName: "com.ecqdigital.saved.data")!
+        
+    //pasar a esta función el objeto codificado y el string del id
+    func setData(id: String, reminderData: Data){
+        defaults.set(reminderData, forKey: id)
+    }
+    
+    func getData(reminderId: String) -> Data{
+        return defaults.object(forKey: reminderId) as! Data
+    }
+    
+    func getAllData() -> [MyReminder]{
+        var responseData : [String:Any]
+        var arrRes = [MyReminder]()
+        
+        if self.defaults.persistentDomain(forName: "com.ecqdigital.saved.data") != nil {
+            responseData = (self.defaults.persistentDomain(forName: "com.ecqdigital.saved.data"))!
+            
+            for item in responseData {
+                
+                let itemData = dataCoded.manageDataCoded.decodeData(id: item.key)
+                arrRes.append(itemData)
+            }
+            
+            print("Listado de elementos guardados -> ")
+            print(arrRes)
+        }
+        
+        return arrRes
+    }
+}
+
+class dataCoded{
+    
+    static let manageDataCoded = dataCoded()
+    
+    func encodeData(data: MyReminder){
+        let encoder = JSONEncoder()
+        if let encodedData = try? encoder.encode(data) {
+            UDM.udm.setData(id:data.identifier, reminderData: encodedData)
+        }
+    }
+    
+    func decodeData(id: String) -> MyReminder{
+        
+        let savedReminder = UDM.udm.getData(reminderId: id)
+        let decoder = JSONDecoder()
+        if let decodedReminder = try? decoder.decode(MyReminder.self, from: savedReminder){
+            return decodedReminder
+        }
+        
+        return MyReminder(title: "Error", date: Date(), identifier: "", body: "")
+    }
+    
 }

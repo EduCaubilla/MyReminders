@@ -22,6 +22,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSaveButton))
         
+        navigationItem.titleView?.tintColor = UIColor.red
+        navigationItem.backBarButtonItem?.tintColor = UIColor.systemGray
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.systemGray
     }
 
     @objc func didTapSaveButton(){
