@@ -15,16 +15,31 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 
     public var completion: ((String,String,Date)-> Void)?
     
+    var detailReminder: MyReminder = MyReminder(title: "", date: Date(), identifier: "", body: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleField.delegate = self
-        bodyField.delegate = self
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSaveButton))
         
         navigationItem.titleView?.tintColor = UIColor.red
         navigationItem.backBarButtonItem?.tintColor = UIColor.systemGray
         navigationItem.rightBarButtonItem?.tintColor = UIColor.systemGray
+        
+        titleField.delegate = self
+        bodyField.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !detailReminder.title.isEmpty {
+            loadDetailReminder()
+        }
+    }
+    
+    func loadDetailReminder(){
+        titleField.text = detailReminder.title
+        bodyField.text = detailReminder.body
+        datePicker.date = detailReminder.date
     }
 
     @objc func didTapSaveButton(){

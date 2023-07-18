@@ -8,7 +8,7 @@
 import UserNotifications
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet var table : UITableView!
     
@@ -17,12 +17,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        table.register(ReminderTableViewCell.nib(), forCellReuseIdentifier: ReminderTableViewCell.identifier)
+        
         table.delegate = self
         table.dataSource = self
         
         loadSavedData()
         
         navigationItem.titleView?.tintColor = UIColor.red
+        navigationItem.largeTitleDisplayMode = .always
     }
     
     @IBAction func didTapAdd(){
@@ -91,6 +94,7 @@ class ViewController: UIViewController {
         
         if !savedData.isEmpty{
             models = savedData
+            models = models.sorted(by: { $0.date < $1.date })
         }
     }
 }
@@ -99,27 +103,105 @@ extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView,
+                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    //Methods for handle swipe action : edit -> go to detail page + delete -> remove element with alert message
+    func handleEditItem(indexPath: Int){
+        print("Edit Item")
+
+        guard let vc = storyboard?.instantiateViewController(identifier: "add") as? AddViewController else{
+            return
+        }
+        
+        let reminder = models[indexPath]
+        
+        vc.title = reminder.title
+        
+        vc.detailReminder = reminder
+        
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.completion = {title,body,date in
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+                
+                let editedReminder = MyReminder(title: title, date: date, identifier: "id_\(title)", body: body)
+                self.models[indexPath] = editedReminder
+                self.table.reloadData()
+                
+                // Set push notification
+                self.schedulePush(title: title, body: body, date: date)
+                
+                print("Reminder edited -->")
+                print(editedReminder)
+                
+                //Save new reminder
+                dataCoded.manageDataCoded.encodeData(data: editedReminder)
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    func handleDeleteItem(indexPath: Int){
+        let alert = UIAlertController(title: "Delete reminder item.", message: "You're about to delete this reminder: \r\(self.models[indexPath].title)", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { action in
+        }
+        alert.addAction(cancelButton)
+        
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
+            print("Delete item -> \(self.models[indexPath])")
+            
+            //Delete from local
+            UDM.udm.deleteItem(id: self.models[indexPath].identifier)
+            
+            //Delete from list in table
+            self.models.remove(at: indexPath)
+            self.table.reloadData()
+        }
+        alert.addAction(deleteButton)
+        
+        DispatchQueue.main.async(execute: {self.present(alert, animated: true, completion: nil)})
+    }
+    
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete"){
+            [weak self] (action, view, completionHandler) in self?.handleDeleteItem(indexPath: indexPath.row)
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .red
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit"){
+            [weak self] (action, view, completionHandler) in self?.handleEditItem(indexPath: indexPath.row)
+            completionHandler(true)
+        }
+        editAction.backgroundColor = .blue
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+    }
 }
 
-extension ViewController:UITableViewDataSource{
+extension ViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = models[indexPath.row].title
-        
-        let date = models[indexPath.row].date
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm E, d MM Y"
-        
-        cell.detailTextLabel?.text = formatter.string(from: date)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReminderTableViewCell.identifier, for: indexPath) as! ReminderTableViewCell
+        cell.configure(with: models[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 
@@ -164,6 +246,11 @@ class UDM{
         
         return arrRes
     }
+    
+    func deleteItem(id: String) -> Void{
+        defaults.removeObject(forKey: id)
+        print("Item with id \(id) was deleted from userDefaults")
+    }
 }
 
 class dataCoded{
@@ -187,5 +274,4 @@ class dataCoded{
         
         return MyReminder(title: "Error", date: Date(), identifier: "", body: "")
     }
-    
 }

@@ -14,6 +14,8 @@
 		775746BF2A6512BD0038082D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 775746BE2A6512BD0038082D /* Assets.xcassets */; };
 		775746C22A6512BD0038082D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 775746C02A6512BD0038082D /* LaunchScreen.storyboard */; };
 		775746CC2A6517D70038082D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775746CB2A6517D70038082D /* AddViewController.swift */; };
+		779A22FB2A666C0E00102279 /* ReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779A22F92A666C0E00102279 /* ReminderTableViewCell.swift */; };
+		779A22FC2A666C0E00102279 /* ReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779A22FA2A666C0E00102279 /* ReminderTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		775746C12A6512BD0038082D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		775746C32A6512BD0038082D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		775746CB2A6517D70038082D /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		779A22F92A666C0E00102279 /* ReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewCell.swift; sourceTree = "<group>"; };
+		779A22FA2A666C0E00102279 /* ReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		775746B42A6512B20038082D /* MyReminders */ = {
 			isa = PBXGroup;
 			children = (
+				779A22F82A666BBB00102279 /* ReminderTableViewCell */,
 				775746B52A6512B20038082D /* AppDelegate.swift */,
 				775746B72A6512B20038082D /* SceneDelegate.swift */,
 				775746B92A6512B20038082D /* ViewController.swift */,
@@ -68,6 +73,15 @@
 				775746CB2A6517D70038082D /* AddViewController.swift */,
 			);
 			path = MyReminders;
+			sourceTree = "<group>";
+		};
+		779A22F82A666BBB00102279 /* ReminderTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				779A22F92A666C0E00102279 /* ReminderTableViewCell.swift */,
+				779A22FA2A666C0E00102279 /* ReminderTableViewCell.xib */,
+			);
+			path = ReminderTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +144,7 @@
 				775746C22A6512BD0038082D /* LaunchScreen.storyboard in Resources */,
 				775746BF2A6512BD0038082D /* Assets.xcassets in Resources */,
 				775746BD2A6512B20038082D /* Main.storyboard in Resources */,
+				779A22FC2A666C0E00102279 /* ReminderTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +159,7 @@
 				775746B62A6512B20038082D /* AppDelegate.swift in Sources */,
 				775746CC2A6517D70038082D /* AddViewController.swift in Sources */,
 				775746B82A6512B20038082D /* SceneDelegate.swift in Sources */,
+				779A22FB2A666C0E00102279 /* ReminderTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
